@@ -7,16 +7,24 @@ public abstract class Pokemon {
         private int hp;
         private String food;
         private String sound;
-        private String type;
+        protected String type;
 
-        public Pokemon (String name, int level, int hp, String food, String sound, String type) {
+        public Pokemon (String name, int level, int hp, String food, String sound) {
             this.name = name;
             this.level = level;
             this.hp = hp;
             this.food = food;
             this.sound = sound;
-            this.type = type;
         }
+
+    public Pokemon (String name, int level, int hp, String food, String sound, String type) {
+        this.name = name;
+        this.level = level;
+        this.hp = hp;
+        this.food = food;
+        this.sound = sound;
+        this.type = type;
+    }
 
     public String getType() {
         return type;
@@ -38,7 +46,7 @@ public abstract class Pokemon {
             this.hp = hp;
         }
 
-    public String getFood(){
+        public String getFood(){
             return food;
         }
 
@@ -47,7 +55,14 @@ public abstract class Pokemon {
         }
 
 
+    protected abstract void attack(Pokemon opponent);
 
 
+    public void feed(String food){
+        if (food.equals(this.getFood())){
+            this.setHp(getHp() + 70);
+            System.out.println(getName() + " has eaten the food and gained some hp, the new hp of the pokemon is " + this.getHp() );
+        }
     }
+}
 
