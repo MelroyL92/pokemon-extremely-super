@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 // Los in deze klasse alle foutmeldingen op door (abstracte) klassen met variabelen en methodes te maken en een interface met methodes (en soms een import).
 public class PokemonGymImpl implements PokemonGym {
@@ -144,11 +144,92 @@ public class PokemonGymImpl implements PokemonGym {
     }
 
     @Override
+    public String chooseFoodPokemon(Pokemon p) {
+        Scanner speler_A = new Scanner(System.in);
+        String type = p.getType();
+        switch (type) {
+            case "fire" -> {
+            FirePokemon fp = (FirePokemon) p;
+            System.out.println("Choose your food");
+            System.out.println(fp.foods);
+            return speler_A.nextLine();
+        }
+        case "water" -> {
+            WaterPokemon wp = (WaterPokemon) p;
+            System.out.println("Choose your food");
+            System.out.println(wp.foods);
+            return speler_A.nextLine();
+        }
+        case "electric" -> {
+            ElectricPokemon ep = (ElectricPokemon) p;
+            System.out.println("Choose your food");
+            System.out.println(ep.foods);
+            return speler_A.nextLine();
+        }
+        default -> {
+            GrassPokemon gp = (GrassPokemon) p;
+            System.out.println("Choose your food");
+            System.out.println(gp.foods);
+            return speler_A.nextLine();
+        }
+    }
+}
+
+
+    @Override
+    public void performFeedPokemon(Pokemon pokemon, Pokemon gymPokemon, String food) {
+        FirePokemon fire;
+        ElectricPokemon electric;
+        GrassPokemon grass;
+        WaterPokemon water;
+
+        String chosenFood = food.toLowerCase(Locale.ROOT);
+
+        switch(pokemon.getType()){
+            case "fire" -> {
+                fire = new FirePokemon(pokemon.getName(), pokemon.getLevel(), pokemon.getHp(), pokemon.getFood(), pokemon.getSound());
+                if (chosenFood.equalsIgnoreCase("firenougats" )){
+                    fire.firenougats(pokemon,food);
+                }
+            }
+            case "electric" -> {
+                electric = new ElectricPokemon(pokemon.getName(), pokemon.getLevel(), pokemon.getHp(), pokemon.getFood(), pokemon.getSound());
+                if (chosenFood.equalsIgnoreCase("Pokebrocks")) {
+                    electric.pokebrocks(pokemon, food);
+                }
+                else {
+                    System.out.println("the pokemon does not like the food");
+                }
+            }
+            case "grass" -> {
+                grass = new GrassPokemon(pokemon.getName(), pokemon.getLevel(), pokemon.getHp(), pokemon.getFood(), pokemon.getSound());
+                if (chosenFood.equalsIgnoreCase("everything")) {
+                    grass.everything(pokemon,food);
+                } else if (chosenFood.equalsIgnoreCase("pokeleafs")){
+                    grass.pokeleafs(pokemon,food);
+                }
+            }
+            case "water" -> {
+                water = new WaterPokemon(pokemon.getName(), pokemon.getLevel(), pokemon.getHp(), pokemon.getFood(), pokemon.getSound());
+                if (chosenFood.equalsIgnoreCase("pokeflakes")){
+                    water.pokeflakes(pokemon,food);
+                }
+
+            }
+            default -> {
+                System.out.println("nothing happened");
+            }
+        }
+
+    }
+
+    @Override
     public void performAttackPlayer(Pokemon pokemon, Pokemon gymPokemon, String attack){
         FirePokemon fire;
         ElectricPokemon electric;
         GrassPokemon grass;
         WaterPokemon water;
+
 
         String choosenAttack = attack.toLowerCase(Locale.ROOT);
 
@@ -191,6 +272,7 @@ public class PokemonGymImpl implements PokemonGym {
             }
         }
     }
+
 
     @Override
     public void gymOwnerAttacks(Pokemon gymPokemon, Pokemon pokemon){
@@ -247,13 +329,16 @@ public class PokemonGymImpl implements PokemonGym {
     public void attackOrChange(Pokemon pokemon, Pokemon gymPokemon, PokemonTrainer trainer, PokemonGymOwner gym){
         Scanner speler_A = new Scanner(System.in);
 
-        System.out.println("Do you want to attack or change your pokemon?");
-        System.out.println("Type a for attack or c for change");
+        System.out.println("Do you want to attack, change or feed your pokemon?");
+        System.out.println("Type a for attack, c for change or f for feed");
         String choice = speler_A.nextLine();
 
         if (choice.equalsIgnoreCase("a")) {
             String attack = chooseAttackPlayer(pokemon);
             performAttackPlayer(pokemon, gymPokemon, attack);
+        } else if (choice.equalsIgnoreCase("f")) {
+            String food = chooseFoodPokemon(pokemon);
+            performFeedPokemon(pokemon, gymPokemon, food);
         } else {
             pokemon = choosePokemon(trainer);
             attackOrChange(pokemon, gymPokemon, trainer, gym);
