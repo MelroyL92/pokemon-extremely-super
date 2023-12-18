@@ -8,6 +8,7 @@ public class GrassPokemon extends Pokemon{
     }
 
     List<String> attacks = Arrays.asList("leaveBlade", "leechSeed", "leafStorm", "solarBeam");
+    List<String> foods = Arrays.asList("pokeLeaf", "pokeFlake", "everything", "fireNougats", "Pokebrocks");
 
     @Override
     protected void attack(Pokemon opponent) {
@@ -57,5 +58,19 @@ public class GrassPokemon extends Pokemon{
 
     List<String> getAttacks() {
         return attacks;
+    }
+
+    public void everything(Pokemon pokemon, String food) {
+        if (food.equalsIgnoreCase("everything")){
+            pokemon.setHp(getHp() + 40);
+            System.out.println("the new hp of " + pokemon.getName() + " = " + pokemon.getHp());
+        }
+    }
+
+    public void pokeleafs(Pokemon pokemon, String food) {
+        if (food.equalsIgnoreCase("pokeleafs")){
+            pokemon.setHp(getHp() + 40);
+            System.out.println("the new hp of " + pokemon.getName() + " = " + pokemon.getHp());
+        }
     }
 }

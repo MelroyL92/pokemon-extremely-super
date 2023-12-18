@@ -19,7 +19,11 @@ public interface PokemonGym {
 
     String chooseAttackPlayer(Pokemon p);
 
+    String chooseFoodPokemon(Pokemon p);
+
     void performAttackPlayer(Pokemon pokemon, Pokemon gymPokemon, String attack);
+
+    void performFeedPokemon(Pokemon pokemon, Pokemon gymPokemon, String food);
 
     void gymOwnerAttacks(Pokemon gymPokemon, Pokemon pokemon);
 

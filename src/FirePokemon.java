@@ -8,6 +8,7 @@ public class FirePokemon extends Pokemon {
     }
 
     List<String> attacks = Arrays.asList("flameThrower", "pyroBall", "fireLash", "inferno");
+    List<String> foods = Arrays.asList("pokeLeaf", "pokeFlake", "everything", "fireNougats", "Pokebrocks");
 
     @Override
     protected void attack(Pokemon opponent) {
@@ -57,6 +58,13 @@ public class FirePokemon extends Pokemon {
 
     List<String> getAttacks() {
         return attacks;
+    }
+
+    public void firenougats(Pokemon pokemon, String food) {
+            if (food.equalsIgnoreCase("firenougats")){
+                pokemon.setHp(getHp() + 40);
+                System.out.println("the new hp of " + pokemon.getName() + " = " + pokemon.getHp());
+            }
     }
 
 }

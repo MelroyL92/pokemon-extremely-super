@@ -26,6 +26,8 @@ public abstract class Pokemon {
         this.type = type;
     }
 
+
+
     public String getType() {
         return type;
     }
@@ -58,7 +60,7 @@ public abstract class Pokemon {
     protected abstract void attack(Pokemon opponent);
 
 
-    public void feed(String food){
+    public void eat(){
         if (food.equals(this.getFood())){
             this.setHp(getHp() + 70);
             System.out.println(getName() + " has eaten the food and gained some hp, the new hp of the pokemon is " + this.getHp() );
